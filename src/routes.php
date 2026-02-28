@@ -16,7 +16,7 @@ function topNavItems(): array
     return [
         ['label' => 'Docs', 'path' => '/docs/getting-started'],
         ['label' => 'Examples', 'path' => '/examples'],
-        ['label' => 'Features', 'path' => '/features'],
+        ['label' => 'Playground', 'path' => '/playground'],
         ['label' => 'Community', 'path' => '/community'],
     ];
 }
@@ -26,7 +26,6 @@ function siteRoutes(): array
 {
     return [
         '/' => 'Home',
-        '/features' => 'Features',
         '/examples' => 'Showcase',
         '/community' => 'Community',
         '/playground' => 'Playground',

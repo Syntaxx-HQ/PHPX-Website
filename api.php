@@ -7,9 +7,31 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+// The compiler writes to STDOUT/STDERR (defined in CLI, not under the web SAPI).
+if (!defined('STDOUT')) {
+    define('STDOUT', fopen('php://stdout', 'wb'));
+}
+if (!defined('STDERR')) {
+    define('STDERR', fopen('php://stderr', 'wb'));
+}
+
 header('Content-Type: application/json');
 
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+
+if ($path === '/api/compile') {
+    // The PHPX compiler runs reliably here (native PHP). The browser then evals
+    // and renders the returned PHP live. Input is raw PHPX (no opening tag).
+    $code = file_get_contents('php://input');
+    try {
+        $php = (new \Syntaxx\PHPX\Compiler())->compileString("<?php\n" . $code, 'playground.phpx');
+        $php = preg_replace('/^\s*<\?php\s*/', '', $php);
+        echo json_encode(['php' => $php]);
+    } catch (\Throwable $e) {
+        echo json_encode(['error' => get_class($e) . ': ' . $e->getMessage()]);
+    }
+    return;
+}
 
 if ($path === '/api/example-todos') {
     usleep(150000); // a little latency so loading states are visible
