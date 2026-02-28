@@ -55,6 +55,10 @@ window.getPgCode = function () {
   var ta = document.getElementById('playground-code');
   return ta ? ta.value : '';
 };
+window.setPgCode = function (code) {
+  if (window.__pgEditor) window.__pgEditor.setValue(code);
+  else { var ta = document.getElementById('playground-code'); if (ta) ta.value = code; }
+};
 </script>
 HTML;
 

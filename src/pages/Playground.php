@@ -91,19 +91,10 @@ function runPlayground(): void
         });
 }
 
-function Playground()
+/** The example snippets offered by the playground select. Each defines Demo(). */
+function playgroundExamples(): array
 {
-    // Upgrade the textarea to a syntax-highlighted CodeMirror editor after the
-    // client takes over (effects never run on the server, so no-JS gets a plain
-    // textarea).
-    useEffect(function () {
-        $window = new Vrzno();
-        if ($window->CodeMirror) {
-            $window->initPgEditor('playground-code');
-        }
-    }, []);
-
-    $default = <<<'PHPX'
+    $counter = <<<'PHPX'
 function Demo() {
     [$count, $setCount] = useState(0);
     return (
@@ -117,6 +108,113 @@ function Demo() {
 }
 PHPX;
 
+    $toggle = <<<'PHPX'
+function Demo() {
+    [$on, $setOn] = useState(false);
+    return (
+        <button
+            onClick={fn() => $setOn(!$on)}
+            style="padding:10px 18px;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:16px;background:{$on ? '#16a34a' : '#94a3b8'}"
+        >
+            {$on ? 'ON' : 'OFF'}
+        </button>
+    );
+}
+PHPX;
+
+    $input = <<<'PHPX'
+function Demo() {
+    [$text, $setText] = useState('');
+    return (
+        <div style="font-size:16px">
+            <input
+                value={$text}
+                onInput={fn($e) => $setText($e->target->value)}
+                placeholder="Type here..."
+                style="border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;width:100%"
+            />
+            <p>You typed: {$text}</p>
+        </div>
+    );
+}
+PHPX;
+
+    $todo = <<<'PHPX'
+function Demo() {
+    [$todos, $setTodos] = useState(['Learn PHPX']);
+    [$draft, $setDraft] = useState('');
+    $add = function () use ($draft, $setDraft, $setTodos) {
+        if (trim($draft) === '') return;
+        $setTodos(fn($prev) => [...$prev, $draft]);
+        $setDraft('');
+    };
+    return (
+        <div style="font-size:16px">
+            <input value={$draft} onInput={fn($e) => $setDraft($e->target->value)} style="border:1px solid #cbd5e1;border-radius:8px;padding:6px 10px" />
+            <button onClick={$add} style="margin-left:8px;background:#6d28d9;color:#fff;border:none;border-radius:8px;padding:6px 12px;cursor:pointer">Add</button>
+            <ul>{array_map(fn($t) => <li>{$t}</li>, $todos)}</ul>
+        </div>
+    );
+}
+PHPX;
+
+    $list = <<<'PHPX'
+function Demo() {
+    [$items, $setItems] = useState(['Apples', 'Bananas']);
+    $add = fn() => $setItems(fn($prev) => [...$prev, 'Item ' . (count($prev) + 1)]);
+    return (
+        <div style="font-size:16px">
+            <ul>{array_map(fn($i) => <li>{$i}</li>, $items)}</ul>
+            <button onClick={$add} style="background:#6d28d9;color:#fff;border:none;border-radius:8px;padding:6px 12px;cursor:pointer">Add item</button>
+        </div>
+    );
+}
+PHPX;
+
+    return [
+        ['label' => 'Counter', 'code' => $counter],
+        ['label' => 'Toggle', 'code' => $toggle],
+        ['label' => 'Text input', 'code' => $input],
+        ['label' => 'Todo list', 'code' => $todo],
+        ['label' => 'List', 'code' => $list],
+    ];
+}
+
+/** Load an example into the editor and immediately run it. */
+function pgLoadExample($index): void
+{
+    if ($index === '' || $index === null) {
+        return;
+    }
+    $examples = playgroundExamples();
+    $i = (int) $index;
+    if (!isset($examples[$i])) {
+        return;
+    }
+    $window = new Vrzno();
+    if ($window->setPgCode) {
+        $window->setPgCode($examples[$i]['code']);
+    } else {
+        $window->document->getElementById('playground-code')->value = $examples[$i]['code'];
+    }
+    runPlayground();
+}
+
+function Playground()
+{
+    // Upgrade the textarea to a syntax-highlighted CodeMirror editor after the
+    // client takes over (effects never run on the server, so no-JS gets a plain
+    // textarea).
+    useEffect(function () {
+        $window = new Vrzno();
+        if ($window->CodeMirror) {
+            $window->initPgEditor('playground-code');
+        }
+    }, []);
+
+    $examples = playgroundExamples();
+    $default = $examples[0]['code'];
+
     return (
         <div className="max-w-6xl mx-auto px-6 py-12" data-testid="playground">
             <h1 className="text-4xl font-extrabold text-slate-900 mb-3">Playground</h1>
@@ -127,7 +225,18 @@ PHPX;
 
             <div className="grid lg:grid-cols-2 gap-5 items-start">
                 <div>
-                    <div className="text-xs font-semibold text-slate-400 uppercase tracking-wide mb-2">Editor</div>
+                    <div className="flex items-center justify-between mb-2 gap-3">
+                        <div className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Editor</div>
+                        <select
+                            data-testid="playground-examples"
+                            onChange={fn($e) => pgLoadExample($e->target->value)}
+                            className="text-sm border border-slate-300 rounded-lg px-2 py-1.5 bg-white text-slate-700 cursor-pointer"
+                        >
+                            {array_map(fn($ex, $i) => (
+                                <option value={(string) $i}>{$ex['label']}</option>
+                            ), $examples, array_keys($examples))}
+                        </select>
+                    </div>
                     <textarea
                         id="playground-code"
                         data-testid="playground-code"

@@ -27,3 +27,16 @@ test('the playground compiles and runs the edited code live', async ({ page }) =
     await expect(demo).toContainText('Count: 0', { timeout: 15000 });
     await expect(output).not.toContainText('Compiling');
 });
+
+test('selecting an example loads it into the editor and runs it', async ({ page }) => {
+    await page.goto('/playground');
+    await page.waitForFunction(() => window.php !== undefined, { timeout: 30000 });
+    await page.waitForTimeout(800);
+
+    await page.getByTestId('playground-examples').selectOption({ label: 'Toggle' });
+
+    const demo = page.getByTestId('playground-output').locator('button');
+    await expect(demo).toContainText('OFF', { timeout: 15000 });
+    await demo.click();
+    await expect(demo).toContainText('ON');
+});
