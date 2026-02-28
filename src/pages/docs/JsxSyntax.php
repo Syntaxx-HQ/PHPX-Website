@@ -74,7 +74,7 @@ PHP;
 
             <Callout type="note" title="Watch out for these">
                 Reserved words cannot be component names, and dynamic or namespaced names are not
-                supported. See <a href="/docs/jsx-gotchas">JSX Gotchas</a> for the full list.
+                supported. See <a href="/docs/gotchas">PHPX Gotchas</a> for the full list.
             </Callout>
         </DocPage>
     );

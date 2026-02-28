@@ -20,7 +20,7 @@ PHP;
 PHP;
 
     return (
-        <DocPage title="JSX Gotchas" description="The sharp edges of JSX-in-PHP, and how to avoid them.">
+        <DocPage title="PHPX Gotchas" description="The sharp edges of PHPX, and how to avoid them.">
             <Heading level={2} id="php-not-js">Braces hold PHP, not JavaScript</Heading>
             <p>Everything inside curly braces is parsed as PHP. The three most common mistakes:</p>
             <CodeBlock code={$php} />

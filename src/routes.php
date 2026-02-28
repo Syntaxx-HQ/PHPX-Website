@@ -49,7 +49,7 @@ function docsNav(): array
         ]],
         ['title' => 'Core Concepts', 'items' => [
             ['label' => 'JSX Syntax', 'path' => '/docs/jsx', 'component' => 'JsxSyntax'],
-            ['label' => 'JSX Gotchas', 'path' => '/docs/jsx-gotchas', 'component' => 'JsxGotchas'],
+            ['label' => 'PHPX Gotchas', 'path' => '/docs/gotchas', 'component' => 'JsxGotchas'],
             ['label' => 'Components & Props', 'path' => '/docs/components', 'component' => 'ComponentModel'],
             ['label' => 'Rendering & Mounting', 'path' => '/docs/rendering', 'component' => 'Rendering'],
             ['label' => 'Conditionals & Lists', 'path' => '/docs/conditional-and-lists', 'component' => 'ConditionalsLists'],
