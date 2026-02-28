@@ -1,0 +1,51 @@
+:root {
+    --phpx-purple: #6d28d9;
+    --phpx-purple-dark: #4c1d95;
+    --phpx-accent: #a78bfa;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+    -webkit-font-smoothing: antialiased;
+}
+code, pre, .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+/* Brand helpers (used alongside Tailwind) */
+.text-phpx { color: var(--phpx-purple); }
+.bg-phpx { background-color: var(--phpx-purple); }
+.bg-phpx-dark { background-color: var(--phpx-purple-dark); }
+.gradient-phpx { background: linear-gradient(135deg, var(--phpx-purple) 0%, var(--phpx-purple-dark) 100%); }
+
+/* ---- Documentation prose (no @tailwindcss/typography available) ---- */
+.prose { max-width: 52rem; line-height: 1.7; color: #334155; }
+.prose > h1 { font-size: 2.25rem; font-weight: 800; color: #0f172a; margin: 0 0 .5rem; letter-spacing: -0.02em; }
+.prose h2 { font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 2.5rem 0 1rem; padding-top: .5rem; }
+.prose h3 { font-size: 1.2rem; font-weight: 600; color: #0f172a; margin: 2rem 0 .75rem; }
+.prose p { margin: 1rem 0; }
+.prose a { color: var(--phpx-purple); text-decoration: none; font-weight: 500; }
+.prose a:hover { text-decoration: underline; }
+.prose ul, .prose ol { margin: 1rem 0; padding-left: 1.5rem; }
+.prose li { margin: .4rem 0; }
+.prose > p > code, .prose li > code, .prose td > code, .prose h2 code, .prose h3 code {
+    background: #f1f5f9; color: #be185d; padding: .15rem .4rem; border-radius: .3rem; font-size: .875em;
+}
+.prose .lead { font-size: 1.2rem; color: #64748b; margin: 0 0 1.5rem; }
+.prose pre { margin: 1.25rem 0; }
+.prose table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: .9rem; }
+.prose th, .prose td { text-align: left; padding: .5rem .75rem; border-bottom: 1px solid #e2e8f0; }
+.prose th { font-weight: 600; color: #0f172a; background: #f8fafc; }
+
+/* Anchored headings */
+.anchor-link { opacity: 0; margin-left: .4rem; color: #94a3b8; text-decoration: none; }
+h2:hover .anchor-link, h3:hover .anchor-link { opacity: 1; }
+
+/* Sidebar active link */
+.sidebar-link { display: block; padding: .3rem .75rem; border-radius: .4rem; color: #475569; font-size: .9rem; text-decoration: none; }
+.sidebar-link:hover { background: #f1f5f9; color: #0f172a; }
+.sidebar-link.active { background: #ede9fe; color: var(--phpx-purple-dark); font-weight: 600; }
+
+/* hide tailwind CDN dev warning if it appears */

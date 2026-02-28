@@ -1,0 +1,45 @@
+{
+    "name": "syntaxx/phpx-website",
+    "description": "The official PHPX website \u2014 marketing, live showcase, and full documentation, built with PHPX (SSR + hydration).",
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "syntaxx/wasm-php-runtime-vrzno": "8.3.0",
+        "syntaxx/phpx-framework": "^0.2.0"
+    },
+    "require-dev": {
+        "syntaxx/phpx-build-tools": "^0.1.0",
+        "syntaxx/webassembly-packer": "^0.1.0",
+        "syntaxx/phpx-compiler": "^0.1.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "syntaxx/wasm-php-runtime-vrzno": true
+        }
+    },
+    "extra": {
+        "php-wasm": {
+            "target-dir": "build"
+        }
+    },
+    "scripts": {
+        "build:server": "php vendor/syntaxx/phpx-compiler/bin/compile --compile-php-files src dist",
+        "build:client": "phpx-build build",
+        "build": [
+            "@build:server",
+            "@build:client"
+        ],
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "php -d opcache.enable=0 -S 0.0.0.0:9930 -t public public/index.php"
+        ]
+    }
+}
