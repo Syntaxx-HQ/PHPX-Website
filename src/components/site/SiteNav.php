@@ -14,8 +14,8 @@ function SiteNav($props)
     return (
         <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center h-16 gap-2">
-                <a href="/" className="flex items-center gap-1.5 font-extrabold text-lg text-slate-900 mr-4">
-                    <span>PHP</span><span className="bg-violet-600 text-white px-1.5 rounded">X</span>
+                <a href="/" className="font-extrabold text-xl tracking-tight mr-4">
+                    <span className="text-slate-400">{'<'}</span><span className="text-violet-600">PHPX</span><span className="text-slate-400">{'>'}</span>
                 </a>
                 <nav className="hidden md:flex items-center gap-1">
                     {array_map(fn($item) => (

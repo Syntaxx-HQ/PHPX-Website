@@ -6,7 +6,7 @@ function SiteFooter()
         <footer className="bg-slate-900 text-slate-400 mt-24">
             <div className="max-w-7xl mx-auto px-6 py-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
                 <div className="sm:col-span-2 lg:col-span-1">
-                    <div className="font-extrabold text-white text-lg mb-2">PHP<span className="text-violet-400">X</span></div>
+                    <div className="font-extrabold text-lg mb-2"><span className="text-slate-500">{'<'}</span><span className="text-violet-400">PHPX</span><span className="text-slate-500">{'>'}</span></div>
                     <p className="text-sm leading-relaxed">React-like components in PHP, compiled to WebAssembly. Server-rendered, then hydrated.</p>
                 </div>
                 <div>
