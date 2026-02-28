@@ -40,9 +40,12 @@ $cmHead = <<<'HTML'
 <style>.CodeMirror{height:24rem;border-radius:.5rem;font-size:13px;line-height:1.5}</style>
 <script>
 window.initPgEditor = function (id) {
-  if (!window.CodeMirror || window.__pgEditor) return;
+  if (!window.CodeMirror) return;
   var ta = document.getElementById(id);
-  if (!ta) return;
+  // Each mount (incl. navigating back) renders a brand-new textarea; mark it so we
+  // wrap it once, and rebind __pgEditor to it (the old instance is gone with its DOM).
+  if (!ta || ta.dataset.cm === '1') return;
+  ta.dataset.cm = '1';
   window.__pgEditor = CodeMirror.fromTextArea(ta, {
     lineNumbers: true,
     mode: { name: 'php', startOpen: true },

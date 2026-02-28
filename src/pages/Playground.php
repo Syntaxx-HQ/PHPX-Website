@@ -238,6 +238,10 @@ function Playground()
     // client takes over (effects never run on the server, so no-JS gets a plain
     // textarea).
     useEffect(function () {
+        // A fresh mount (including navigating back here) renders a new
+        // #playground-output and a new textarea, so drop the stale preview root
+        // and re-attach CodeMirror to the new editor.
+        PgState::$root = null;
         $window = new Vrzno();
         if ($window->CodeMirror) {
             $window->initPgEditor('playground-code');
