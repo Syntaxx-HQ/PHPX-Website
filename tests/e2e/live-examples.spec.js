@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
-test('live examples in the showcase are interactive', async ({ page }) => {
-    await page.goto('/examples');
+test('live examples in the docs gallery are interactive', async ({ page }) => {
+    await page.goto('/docs/examples');
 
     // Counter (useState)
     const counter = page.getByTestId('live-counter').first();

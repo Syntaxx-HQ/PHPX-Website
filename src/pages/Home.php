@@ -72,7 +72,7 @@ function Home()
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <a href="/docs/getting-started" className="bg-white text-violet-700 font-semibold px-6 py-3 rounded-lg hover:bg-violet-50">Get started →</a>
-                            <a href="/examples" className="bg-white/10 text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/20">View examples</a>
+                            <a href="/playground" className="bg-white/10 text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/20">Try the playground</a>
                         </div>
                     </div>
                     <HeroDemo />

@@ -18,8 +18,7 @@ function SiteFooter()
                 </div>
                 <div>
                     <div className="text-white font-semibold mb-3 text-sm">Explore</div>
-                    <a href="/examples" className="block text-sm py-1 hover:text-white">Examples</a>
-                    <a href="/features" className="block text-sm py-1 hover:text-white">Features</a>
+                    <a href="/playground" className="block text-sm py-1 hover:text-white">Playground</a>
                     <a href="/community" className="block text-sm py-1 hover:text-white">Community</a>
                 </div>
                 <div>
