@@ -100,7 +100,7 @@ function Demo() {
     return (
         <button
             onClick={fn() => $setCount($count + 1)}
-            style="padding:10px 18px;background:#6d28d9;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:16px"
+            className="bg-violet-600 text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-violet-700 transition"
         >
             Count: {$count}
         </button>
@@ -112,12 +112,15 @@ PHPX;
 function Demo() {
     [$on, $setOn] = useState(false);
     return (
-        <button
-            onClick={fn() => $setOn(!$on)}
-            style="padding:10px 18px;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:16px;background:{$on ? '#16a34a' : '#94a3b8'}"
-        >
-            {$on ? 'ON' : 'OFF'}
-        </button>
+        <div className="flex items-center gap-3">
+            <button
+                onClick={fn() => $setOn(!$on)}
+                className={"px-4 py-2 rounded-lg font-semibold text-white transition " . ($on ? 'bg-green-600' : 'bg-slate-400')}
+            >
+                {$on ? 'ON' : 'OFF'}
+            </button>
+            <span className="text-slate-600">{$on ? 'Enabled' : 'Disabled'}</span>
+        </div>
     );
 }
 PHPX;
@@ -126,14 +129,18 @@ PHPX;
 function Demo() {
     [$text, $setText] = useState('');
     return (
-        <div style="font-size:16px">
+        <div className="space-y-3">
             <input
+                type="text"
                 value={$text}
                 onInput={fn($e) => $setText($e->target->value)}
-                placeholder="Type here..."
-                style="border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;width:100%"
+                placeholder="Type something..."
+                className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-violet-400"
             />
-            <p>You typed: {$text}</p>
+            <div className="text-slate-700">
+                You typed: <span className="font-semibold text-violet-700">{$text}</span>
+            </div>
+            <div className="text-xs text-slate-400">{strlen($text)} characters — focus stays put on every keystroke.</div>
         </div>
     );
 }
@@ -143,16 +150,39 @@ PHPX;
 function Demo() {
     [$todos, $setTodos] = useState(['Learn PHPX']);
     [$draft, $setDraft] = useState('');
+
     $add = function () use ($draft, $setDraft, $setTodos) {
-        if (trim($draft) === '') return;
-        $setTodos(fn($prev) => [...$prev, $draft]);
+        $t = trim($draft);
+        if ($t === '') {
+            return;
+        }
+        $setTodos(fn($prev) => [...$prev, $t]);
         $setDraft('');
     };
+    $remove = fn($i) => $setTodos(fn($prev) => array_values(
+        array_filter($prev, fn($_, $k) => $k !== $i, ARRAY_FILTER_USE_BOTH)
+    ));
+
     return (
-        <div style="font-size:16px">
-            <input value={$draft} onInput={fn($e) => $setDraft($e->target->value)} style="border:1px solid #cbd5e1;border-radius:8px;padding:6px 10px" />
-            <button onClick={$add} style="margin-left:8px;background:#6d28d9;color:#fff;border:none;border-radius:8px;padding:6px 12px;cursor:pointer">Add</button>
-            <ul>{array_map(fn($t) => <li>{$t}</li>, $todos)}</ul>
+        <div className="space-y-3 max-w-sm">
+            <div className="flex gap-2">
+                <input
+                    value={$draft}
+                    onInput={fn($e) => $setDraft($e->target->value)}
+                    onKeyPress={fn($e) => $e->key === 'Enter' ? $add() : null}
+                    placeholder="Add a todo..."
+                    className="flex-1 border border-slate-300 rounded-lg px-3 py-2"
+                />
+                <button onClick={$add} className="bg-violet-600 text-white px-4 rounded-lg font-medium">Add</button>
+            </div>
+            <ul className="space-y-1">
+                {array_map(fn($todo, $i) => (
+                    <li className="flex items-center justify-between bg-slate-50 rounded-lg px-3 py-2">
+                        <span>{$todo}</span>
+                        <button onClick={fn() => $remove($i)} className="text-red-500 text-sm hover:underline">remove</button>
+                    </li>
+                ), $todos, array_keys($todos))}
+            </ul>
         </div>
     );
 }
@@ -160,12 +190,14 @@ PHPX;
 
     $list = <<<'PHPX'
 function Demo() {
-    [$items, $setItems] = useState(['Apples', 'Bananas']);
+    [$items, $setItems] = useState(['Apples', 'Bananas', 'Cherries']);
     $add = fn() => $setItems(fn($prev) => [...$prev, 'Item ' . (count($prev) + 1)]);
     return (
-        <div style="font-size:16px">
-            <ul>{array_map(fn($i) => <li>{$i}</li>, $items)}</ul>
-            <button onClick={$add} style="background:#6d28d9;color:#fff;border:none;border-radius:8px;padding:6px 12px;cursor:pointer">Add item</button>
+        <div className="space-y-3">
+            <ul className="list-disc pl-6 text-slate-700">
+                {array_map(fn($item) => <li>{$item}</li>, $items)}
+            </ul>
+            <button onClick={$add} className="bg-violet-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium">Add item</button>
         </div>
     );
 }
