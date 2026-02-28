@@ -28,6 +28,11 @@
     "extra": {
         "php-wasm": {
             "target-dir": "build"
+        },
+        "phpx": {
+            "watch": {
+                "before": "php vendor/syntaxx/phpx-compiler/bin/compile --compile-php-files src dist"
+            }
         }
     },
     "scripts": {
@@ -40,6 +45,10 @@
         "serve": [
             "Composer\\Config::disableProcessTimeout",
             "php -d opcache.enable=0 -S 0.0.0.0:9930 -t public public/index.php"
+        ],
+        "watch": [
+            "Composer\\Config::disableProcessTimeout",
+            "phpx-build watch"
         ]
     }
 }
