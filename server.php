@@ -25,6 +25,39 @@ ob_implicit_flush(true);
 header('Content-Type: text/html; charset=utf-8');
 header('X-Accel-Buffering: no');
 
+// CodeMirror powers the Playground editor. A small native-JS helper builds the
+// editor (constructing the options object in JS sidesteps VRZNO marshalling).
+$cmHead = <<<'HTML'
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/xml/xml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/clike/clike.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/php/php.min.js"></script>
+<style>.CodeMirror{height:24rem;border-radius:.5rem;font-size:13px;line-height:1.5}</style>
+<script>
+window.initPgEditor = function (id) {
+  if (!window.CodeMirror || window.__pgEditor) return;
+  var ta = document.getElementById(id);
+  if (!ta) return;
+  window.__pgEditor = CodeMirror.fromTextArea(ta, {
+    lineNumbers: true,
+    mode: { name: 'php', startOpen: true },
+    theme: 'dracula',
+    tabSize: 4, indentUnit: 4, lineWrapping: true
+  });
+};
+window.getPgCode = function () {
+  if (window.__pgEditor) return window.__pgEditor.getValue();
+  var ta = document.getElementById('playground-code');
+  return ta ? ta.value : '';
+};
+</script>
+HTML;
+
 $head = "<!doctype html>\n<html lang=\"en\">\n<head>\n"
     . "<meta charset=\"utf-8\">\n"
     . "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
@@ -36,6 +69,7 @@ $head = "<!doctype html>\n<html lang=\"en\">\n<head>\n"
     . "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css\">\n"
     . "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js\"></script>\n"
     . "<link rel=\"stylesheet\" href=\"/css/style.css\">\n"
+    . $cmHead
     . "</head>\n<body>\n";
 
 $wasmLoader = <<<'JS'

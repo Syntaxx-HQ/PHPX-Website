@@ -1,5 +1,7 @@
 <?php
 
+use function Syntaxx\PHPX\Framework\useEffect;
+
 /** Holds the preview root across runs (a closure cannot capture a function-static). */
 class PgState
 {
@@ -64,7 +66,9 @@ function pgRender(string $php): void
 function runPlayground(): void
 {
     $window = new Vrzno();
-    $code = (string) $window->document->getElementById('playground-code')->value;
+    $code = $window->getPgCode
+        ? (string) $window->getPgCode()
+        : (string) $window->document->getElementById('playground-code')->value;
     pgShow(pgMessage('Compiling...', '#94a3b8'));
 
     // Keep the RequestInit flat — VRZNO marshals a nested headers array into a
@@ -89,6 +93,16 @@ function runPlayground(): void
 
 function Playground()
 {
+    // Upgrade the textarea to a syntax-highlighted CodeMirror editor after the
+    // client takes over (effects never run on the server, so no-JS gets a plain
+    // textarea).
+    useEffect(function () {
+        $window = new Vrzno();
+        if ($window->CodeMirror) {
+            $window->initPgEditor('playground-code');
+        }
+    }, []);
+
     $default = <<<'PHPX'
 function Demo() {
     [$count, $setCount] = useState(0);

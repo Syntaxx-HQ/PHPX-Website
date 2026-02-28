@@ -5,7 +5,10 @@ test('the playground compiles and runs the edited code live', async ({ page }) =
 
     // Wait for the WASM runtime to boot (the loader sets window.php when ready).
     await page.waitForFunction(() => window.php !== undefined, { timeout: 30000 });
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(800);
+
+    // The textarea is upgraded to a syntax-highlighted CodeMirror editor.
+    await expect(page.locator('.CodeMirror')).toBeVisible();
 
     // Run the default snippet: server compiles JSX -> PHP, browser evals + renders.
     await page.getByTestId('playground-run').click();
