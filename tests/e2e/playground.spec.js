@@ -10,10 +10,17 @@ test('the playground compiles and runs the edited code live', async ({ page }) =
     // Run the default snippet: server compiles JSX -> PHP, browser evals + renders.
     await page.getByTestId('playground-run').click();
 
-    const demo = page.getByTestId('playground-output').locator('button');
+    const output = page.getByTestId('playground-output');
+    const demo = output.locator('button');
     await expect(demo).toContainText('Count: 0', { timeout: 15000 });
 
     // The compiled-and-executed component is itself interactive.
     await demo.click();
     await expect(demo).toContainText('Count: 1');
+
+    // Re-running compiles again and cleanly replaces the result — the transient
+    // "Compiling..." text must not linger.
+    await page.getByTestId('playground-run').click();
+    await expect(demo).toContainText('Count: 0', { timeout: 15000 });
+    await expect(output).not.toContainText('Compiling');
 });

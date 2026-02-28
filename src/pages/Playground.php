@@ -7,17 +7,32 @@ class PgState
     public static int $runs = 0;
 }
 
-function pgError(string $msg): string
+/** Render an element into the preview root (creating the root once). Routing all
+ *  preview content through the reconciler keeps the loading text, result, and
+ *  errors swapping cleanly — setting innerHTML directly would desync the root. */
+function pgShow($element): void
 {
-    return '<pre style="color:#dc2626;white-space:pre-wrap;font-size:13px;margin:0">'
-        . htmlspecialchars($msg) . '</pre>';
+    $window = new Vrzno();
+    if (PgState::$root === null) {
+        PgState::$root = \Syntaxx\PHPX\Framework\Runtime::createRoot(
+            $window->document->getElementById('playground-output')
+        );
+    }
+    PgState::$root->render($element);
+}
+
+function pgMessage(string $msg, string $color)
+{
+    return \Syntaxx\PHPX\Framework\Component::create(
+        'div',
+        ['style' => 'color:' . $color . ';white-space:pre-wrap;font-size:13px'],
+        [$msg]
+    );
 }
 
 /** Eval the server-compiled PHP into a fresh namespace and render it live. */
 function pgRender(string $php): void
 {
-    $window = new Vrzno();
-    $output = $window->document->getElementById('playground-output');
     try {
         PgState::$runs++;
         $ns = 'PlaygroundRun' . PgState::$runs;
@@ -36,12 +51,9 @@ function pgRender(string $php): void
         if (!function_exists($entry)) {
             throw new \Exception('Define a function named Demo() that returns your component.');
         }
-        if (PgState::$root === null) {
-            PgState::$root = \Syntaxx\PHPX\Framework\Runtime::createRoot($output);
-        }
-        PgState::$root->render(\Syntaxx\PHPX\Framework\Component::create($entry, [], []));
+        pgShow(\Syntaxx\PHPX\Framework\Component::create($entry, [], []));
     } catch (\Throwable $e) {
-        $output->innerHTML = pgError(get_class($e) . ': ' . $e->getMessage());
+        pgShow(pgMessage(get_class($e) . ': ' . $e->getMessage(), '#dc2626'));
     }
 }
 
@@ -52,9 +64,8 @@ function pgRender(string $php): void
 function runPlayground(): void
 {
     $window = new Vrzno();
-    $output = $window->document->getElementById('playground-output');
     $code = (string) $window->document->getElementById('playground-code')->value;
-    $output->innerHTML = '<span style="color:#94a3b8;font-size:13px">Compiling...</span>';
+    pgShow(pgMessage('Compiling...', '#94a3b8'));
 
     // Keep the RequestInit flat — VRZNO marshals a nested headers array into a
     // value fetch rejects. The server reads php://input regardless of headers.
@@ -65,11 +76,11 @@ function runPlayground(): void
         ->then(function ($json) {
             $data = json_decode((string) $json, true);
             if (!is_array($data)) {
-                (new Vrzno())->document->getElementById('playground-output')->innerHTML = pgError('Bad response from the compiler.');
+                pgShow(pgMessage('Bad response from the compiler.', '#dc2626'));
                 return;
             }
             if (isset($data['error'])) {
-                (new Vrzno())->document->getElementById('playground-output')->innerHTML = pgError($data['error']);
+                pgShow(pgMessage($data['error'], '#dc2626'));
                 return;
             }
             pgRender($data['php']);
