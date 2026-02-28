@@ -1,5 +1,50 @@
 <?php
 
+use function Syntaxx\PHPX\Framework\useState;
+
+/** The hero live demo: a running counter with a toggle to reveal its source. */
+function HeroDemo()
+{
+    [$showCode, $setShowCode] = useState(false);
+    $code = <<<'PHP'
+function Counter() {
+    [$count, $setCount] = useState(0);
+    return (
+        <button onClick={fn() => $setCount($count + 1)}>
+            Count: {$count}
+        </button>
+    );
+}
+PHP;
+
+    return (
+        <div className="bg-white/5 backdrop-blur rounded-2xl border border-white/10 p-6">
+            <div className="flex items-center justify-between mb-3">
+                <span className="text-sm text-violet-200">Live — click it:</span>
+                <button
+                    data-testid="hero-toggle-code"
+                    onClick={fn() => $setShowCode(!$showCode)}
+                    className="text-xs text-violet-200 hover:text-white underline underline-offset-2"
+                >
+                    {$showCode ? 'Hide code' : 'Show code'}
+                </button>
+            </div>
+            <div className="bg-white rounded-xl p-10 flex items-center justify-center">
+                <CounterExample />
+            </div>
+            {$showCode ? (
+                <div className="mt-4" data-testid="hero-code">
+                    <CodeBlock code={$code} language="php" />
+                </div>
+            ) : (
+                <div className="mt-4 text-xs text-violet-200">
+                    A real PHPX component — server-rendered, then hydrated to interactive.
+                </div>
+            )}
+        </div>
+    );
+}
+
 /** Marketing home page. */
 function Home()
 {
@@ -30,15 +75,7 @@ function Home()
                             <a href="/examples" className="bg-white/10 text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/20">View examples</a>
                         </div>
                     </div>
-                    <div className="bg-white/5 backdrop-blur rounded-2xl border border-white/10 p-6">
-                        <div className="text-sm text-violet-200 mb-3">Live — click it:</div>
-                        <div className="bg-white rounded-xl p-10 flex items-center justify-center">
-                            <CounterExample />
-                        </div>
-                        <div className="mt-4 text-xs text-violet-200">
-                            A real PHPX component — server-rendered, then hydrated to interactive.
-                        </div>
-                    </div>
+                    <HeroDemo />
                 </div>
             </section>
 
