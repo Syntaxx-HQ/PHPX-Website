@@ -137,9 +137,9 @@ PHPX;
                     <button
                         data-testid="playground-run"
                         onClick={fn() => runPlayground()}
-                        className="mt-3 bg-violet-600 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-violet-700 transition"
+                        className="mt-3 w-full bg-violet-600 text-white font-semibold py-2.5 rounded-lg hover:bg-violet-700 transition"
                     >
-                        See it in action
+                        run
                     </button>
                 </div>
 
