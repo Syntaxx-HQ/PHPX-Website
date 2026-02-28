@@ -1,20 +1,37 @@
 <?php
 
 /**
- * Dev router for `php -S`. Real files under public/ (css, build/*.mjs/.wasm/.data)
- * are served directly; /api/* hits api.php; every other path is server-rendered.
+ * Front controller. Dispatches to server.php (SSR) or api.php (JSON).
+ *
+ * Finds the app code in whichever layout applies:
+ *   - dev `php -S -t public public/index.php`  -> server.php in the parent dir
+ *   - Hetzner single-folder deploy             -> app code in ./app (see DEPLOY.md)
+ *   - flat deploy                              -> server.php alongside index.php
+ *
+ * Under Apache, static assets + access control are handled by .htaccess; this
+ * file only routes requests and marks itself as the legitimate entry point.
  */
 
-$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$file = __DIR__ . $uri;
+define('PHPX_ENTRY', 1);
 
-if ($uri !== '/' && is_file($file)) {
-    return false; // let the built-in server serve the static asset
+$base = __DIR__;
+foreach ([__DIR__ . '/app', dirname(__DIR__), __DIR__] as $candidate) {
+    if (is_file($candidate . '/server.php')) {
+        $base = $candidate;
+        break;
+    }
+}
+
+$uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+
+// Dev only: let the built-in server stream real static files (css, build/*) itself.
+if (PHP_SAPI === 'cli-server' && $uri !== '/' && is_file(__DIR__ . $uri)) {
+    return false;
 }
 
 if (strncmp($uri, '/api/', 5) === 0) {
-    require __DIR__ . '/../api.php';
-    return true;
+    require $base . '/api.php';
+    return;
 }
 
-require __DIR__ . '/../server.php';
+require $base . '/server.php';

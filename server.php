@@ -6,6 +6,13 @@
  * The same compiled PHP renders here (natively) and in the browser (WASM).
  */
 
+// Only reachable through the front controller (index.php) or CLI tooling/tests.
+// Blocks direct web access even if a server misconfig bypasses .htaccess.
+if (PHP_SAPI !== 'cli' && !defined('PHPX_ENTRY')) {
+    http_response_code(403);
+    exit('Forbidden');
+}
+
 require __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/dist/App.php';
 
