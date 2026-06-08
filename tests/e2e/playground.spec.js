@@ -1,0 +1,62 @@
+const { test, expect } = require('@playwright/test');
+
+test('the playground compiles and runs the edited code live', async ({ page }) => {
+    await page.goto('/playground');
+
+    // Wait for the WASM runtime to boot (the loader sets window.php when ready).
+    await page.waitForFunction(() => window.php !== undefined, { timeout: 30000 });
+    await page.waitForTimeout(800);
+
+    // The textarea is upgraded to a syntax-highlighted CodeMirror editor.
+    await expect(page.locator('.CodeMirror')).toBeVisible();
+
+    // Run the default snippet: server compiles JSX -> PHP, browser evals + renders.
+    await page.getByTestId('playground-run').click();
+
+    const output = page.getByTestId('playground-output');
+    const demo = output.locator('button');
+    await expect(demo).toContainText('Count: 0', { timeout: 15000 });
+
+    // The compiled-and-executed component is itself interactive.
+    await demo.click();
+    await expect(demo).toContainText('Count: 1');
+
+    // Re-running compiles again and cleanly replaces the result — the transient
+    // "Compiling..." text must not linger.
+    await page.getByTestId('playground-run').click();
+    await expect(demo).toContainText('Count: 0', { timeout: 15000 });
+    await expect(output).not.toContainText('Compiling');
+});
+
+test('the playground still works after navigating away and back', async ({ page }) => {
+    await page.goto('/playground');
+    await page.waitForFunction(() => window.php !== undefined, { timeout: 30000 });
+    await page.waitForTimeout(800);
+
+    // Leave the playground (client-side nav) and come back.
+    await page.click('a[href="/community"]');
+    await page.waitForTimeout(600);
+    await page.click('a[href="/playground"]');
+    await page.waitForTimeout(1200);
+
+    // The editor is re-attached and running still works (no stale root / editor).
+    await expect(page.locator('.CodeMirror')).toBeVisible();
+    await page.getByTestId('playground-run').click();
+    const demo = page.getByTestId('playground-output').locator('button');
+    await expect(demo).toContainText('Count: 0', { timeout: 15000 });
+    await demo.click();
+    await expect(demo).toContainText('Count: 1');
+});
+
+test('selecting an example loads it into the editor and runs it', async ({ page }) => {
+    await page.goto('/playground');
+    await page.waitForFunction(() => window.php !== undefined, { timeout: 30000 });
+    await page.waitForTimeout(800);
+
+    await page.getByTestId('playground-examples').selectOption({ label: 'Toggle' });
+
+    const demo = page.getByTestId('playground-output').locator('button');
+    await expect(demo).toContainText('OFF', { timeout: 15000 });
+    await demo.click();
+    await expect(demo).toContainText('ON');
+});
