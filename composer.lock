@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2c569b5f8ac322d4d18cca2e642c86dc",
+    "content-hash": "b3698964668ed98fba759eefec5dc32c",
     "packages": [
         {
             "name": "syntaxx/phpx-compiler",
@@ -142,7 +142,7 @@
         },
         {
             "name": "syntaxx/wasm-php-runtime-vrzno",
-            "version": "v8.3.0",
+            "version": "v8.4.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Syntaxx-HQ/PHPX-WasmPHPRuntimeVrzno.git",
@@ -173,7 +173,7 @@
             "description": "Prebuilt PHP WebAssembly runtime (php.wasm + php.js)",
             "support": {
                 "issues": "https://github.com/Syntaxx-HQ/PHPX-WasmPHPRuntimeVrzno/issues",
-                "source": "https://github.com/Syntaxx-HQ/PHPX-WasmPHPRuntimeVrzno/tree/v8.3.0"
+                "source": "https://github.com/Syntaxx-HQ/PHPX-WasmPHPRuntimeVrzno/tree/v8.4.22"
             },
             "time": "2025-05-28T18:11:50+00:00"
         }

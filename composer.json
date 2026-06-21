@@ -4,7 +4,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "syntaxx/wasm-php-runtime-vrzno": "8.3.0",
+        "syntaxx/wasm-php-runtime-vrzno": "8.4.22",
         "syntaxx/phpx-framework": "^0.3.0",
         "syntaxx/phpx-compiler": "^0.1.0"
     },
