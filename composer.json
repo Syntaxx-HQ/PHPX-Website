@@ -21,7 +21,6 @@
     },
     "config": {
         "sort-packages": true,
-        "platform-check": false,
         "allow-plugins": {
             "syntaxx/wasm-php-runtime-vrzno": true
         }
