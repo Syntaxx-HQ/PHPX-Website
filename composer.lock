@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "36b4d90dbec115b3fd24b795ab800195",
+    "content-hash": "2c569b5f8ac322d4d18cca2e642c86dc",
     "packages": [
         {
             "name": "syntaxx/phpx-compiler",
@@ -45,17 +45,20 @@
         },
         {
             "name": "syntaxx/phpx-framework",
-            "version": "v0.2.0",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Syntaxx-HQ/PHPX-Framework.git",
-                "reference": "3f0ab552ca2f97e5ee92ae2a463f21e52f21f7cb"
+                "reference": "4c632f4dc27b098f6de46540c9861c8cbc5384f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Syntaxx-HQ/PHPX-Framework/zipball/3f0ab552ca2f97e5ee92ae2a463f21e52f21f7cb",
-                "reference": "3f0ab552ca2f97e5ee92ae2a463f21e52f21f7cb",
+                "url": "https://api.github.com/repos/Syntaxx-HQ/PHPX-Framework/zipball/4c632f4dc27b098f6de46540c9861c8cbc5384f8",
+                "reference": "4c632f4dc27b098f6de46540c9861c8cbc5384f8",
                 "shasum": ""
+            },
+            "require": {
+                "php": ">=8.4"
             },
             "require-dev": {
                 "phpunit/phpunit": "^10.0"
@@ -76,9 +79,9 @@
             "description": "PHPX Framework - A modern PHP framework with JSX-like syntax support",
             "support": {
                 "issues": "https://github.com/Syntaxx-HQ/PHPX-Framework/issues",
-                "source": "https://github.com/Syntaxx-HQ/PHPX-Framework/tree/v0.2.0"
+                "source": "https://github.com/Syntaxx-HQ/PHPX-Framework/tree/v0.3.0"
             },
-            "time": "2026-06-07T07:43:45+00:00"
+            "time": "2026-06-21T09:32:55+00:00"
         },
         {
             "name": "syntaxx/phpx-parser",
@@ -222,16 +225,16 @@
         },
         {
             "name": "syntaxx/phpx-build-tools",
-            "version": "v0.1.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Syntaxx-HQ/PHPX-BuildTools.git",
-                "reference": "04bcc10cf184e1cff6d8b9dc85d6bdfeb56558bf"
+                "reference": "907009597d8587a79e87eaff2813fd114fad17db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Syntaxx-HQ/PHPX-BuildTools/zipball/04bcc10cf184e1cff6d8b9dc85d6bdfeb56558bf",
-                "reference": "04bcc10cf184e1cff6d8b9dc85d6bdfeb56558bf",
+                "url": "https://api.github.com/repos/Syntaxx-HQ/PHPX-BuildTools/zipball/907009597d8587a79e87eaff2813fd114fad17db",
+                "reference": "907009597d8587a79e87eaff2813fd114fad17db",
                 "shasum": ""
             },
             "require": {
@@ -271,9 +274,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Syntaxx-HQ/PHPX-BuildTools/issues",
-                "source": "https://github.com/Syntaxx-HQ/PHPX-BuildTools/tree/v0.1.0"
+                "source": "https://github.com/Syntaxx-HQ/PHPX-BuildTools/tree/v0.2.1"
             },
-            "time": "2025-10-26T21:20:42+00:00"
+            "time": "2026-06-21T18:33:36+00:00"
         },
         {
             "name": "syntaxx/webassembly-packer",

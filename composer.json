@@ -5,11 +5,11 @@
     "type": "project",
     "require": {
         "syntaxx/wasm-php-runtime-vrzno": "8.3.0",
-        "syntaxx/phpx-framework": "^0.2.0",
+        "syntaxx/phpx-framework": "^0.3.0",
         "syntaxx/phpx-compiler": "^0.1.0"
     },
     "require-dev": {
-        "syntaxx/phpx-build-tools": "^0.1.0",
+        "syntaxx/phpx-build-tools": "^0.2.1",
         "syntaxx/webassembly-packer": "^0.1.0"
     },
     "minimum-stability": "dev",
@@ -21,6 +21,7 @@
     },
     "config": {
         "sort-packages": true,
+        "platform-check": false,
         "allow-plugins": {
             "syntaxx/wasm-php-runtime-vrzno": true
         }
