@@ -37,7 +37,7 @@
     },
     "scripts": {
         "build:server": "php vendor/syntaxx/phpx-compiler/bin/compile --compile-php-files src dist",
-        "build:client": "phpx-build build",
+        "build:client": "BASE_URL=/ phpx-build build",
         "build": [
             "@build:server",
             "@build:client"
