@@ -31,8 +31,8 @@ PHP;
 
             <Heading level={2} id="register">Registering components</Heading>
             <p>
-                Names normally resolve to global functions. To register a component explicitly — for
-                example a closure — use <code>{'Runtime::registerComponent($name, $callable)'}</code>.
+                Names normally resolve to global functions. To register a component explicitly - for
+                example a closure - use <code>{'Runtime::registerComponent($name, $callable)'}</code>.
             </p>
 
             <Callout type="note" title="Hydration is different">

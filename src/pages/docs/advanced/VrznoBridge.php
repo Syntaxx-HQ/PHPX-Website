@@ -21,7 +21,7 @@ PHP;
 
             <Heading level={2} id="when">When to use it</Heading>
             <p>
-                Most of the time you never touch VRZNO directly — the framework handles the DOM for you.
+                Most of the time you never touch VRZNO directly - the framework handles the DOM for you.
                 Reach for it inside effects when you need an imperative browser API such as focus,
                 scrolling, or a third-party library.
             </p>

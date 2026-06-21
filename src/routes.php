@@ -16,6 +16,7 @@ function topNavItems(): array
     return [
         ['label' => 'Docs', 'path' => '/docs/getting-started'],
         ['label' => 'Playground', 'path' => '/playground'],
+        ['label' => 'Showcase', 'path' => '/showcase'],
         ['label' => 'Community', 'path' => '/community'],
     ];
 }
@@ -25,8 +26,9 @@ function siteRoutes(): array
 {
     return [
         '/' => 'Home',
-        '/community' => 'Community',
         '/playground' => 'Playground',
+        '/showcase' => 'Showcase',
+        '/community' => 'Community',
     ];
 }
 
@@ -69,7 +71,7 @@ function docsNav(): array
             ['label' => 'The Event Object', 'path' => '/docs/events/event-object', 'component' => 'EventObject'],
             ['label' => 'Forms & Inputs', 'path' => '/docs/events/forms-and-inputs', 'component' => 'FormsInputs'],
         ]],
-        ['title' => 'The Fiber Engine', 'items' => [
+        ['title' => 'The Reconciler', 'items' => [
             ['label' => 'Overview', 'path' => '/docs/fiber/overview', 'component' => 'FiberOverview'],
             ['label' => 'Reconciliation & Keys', 'path' => '/docs/fiber/reconciliation', 'component' => 'Reconciliation'],
             ['label' => 'Focus & Caret', 'path' => '/docs/fiber/focus-and-caret', 'component' => 'FocusCaret'],
@@ -146,23 +148,23 @@ function routeComponent(string $path): array
 function siteTitle(string $path): string
 {
     if ($path === '/') {
-        return 'PHPX — Take back the web';
+        return 'PHPX - Take back the web';
     }
     foreach (docsNav() as $section) {
         foreach ($section['items'] as $item) {
             if ($item['path'] === $path) {
-                return $item['label'] . ' — PHPX Docs';
+                return $item['label'] . ' - PHPX Docs';
             }
         }
     }
     foreach (topNavItems() as $item) {
         if ($item['path'] === $path) {
-            return $item['label'] . ' — PHPX';
+            return $item['label'] . ' - PHPX';
         }
     }
     $site = siteRoutes();
     if (isset($site[$path])) {
-        return ucfirst(trim($path, '/')) . ' — PHPX';
+        return ucfirst(trim($path, '/')) . ' - PHPX';
     }
     return 'PHPX';
 }

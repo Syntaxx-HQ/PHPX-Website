@@ -35,6 +35,18 @@ code, pre, .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 }
 .prose .lead { font-size: 1.2rem; color: #64748b; margin: 0 0 1.5rem; }
 .prose pre { margin: 1.25rem 0; }
+/* Let code blocks use their own (white) background, not the hljs theme's grey. */
+pre code.hljs, code.hljs { background: transparent; padding: 0; }
+/* Code-sample syntax colors (exact values from the reference). */
+.hljs { color: #1e293b; }
+.hljs-keyword { color: #7c3aed; }
+.hljs-meta { color: #2563eb; }
+.hljs-title, .hljs-title.function_, .hljs-title.class_, .hljs-tag, .hljs-name { color: #2563eb; }
+.hljs-attr, .hljs-attribute { color: #16a34a; }
+.hljs-string, .hljs-meta .hljs-string { color: #16a34a; }
+.hljs-variable, .hljs-template-variable { color: #0f766e; }
+.hljs-number, .hljs-literal, .hljs-symbol { color: #9333ea; }
+.hljs-comment, .hljs-quote { color: #a0a1a7; font-style: italic; }
 .prose table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: .9rem; }
 .prose th, .prose td { text-align: left; padding: .5rem .75rem; border-bottom: 1px solid #e2e8f0; }
 .prose th { font-weight: 600; color: #0f172a; background: #f8fafc; }

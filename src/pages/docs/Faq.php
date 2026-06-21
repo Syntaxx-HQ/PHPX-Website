@@ -25,7 +25,7 @@ function Faq()
             <Heading level={2} id="focus">Why did inputs lose focus before</Heading>
             <p>
                 Older PHP-in-the-browser runtimes replaced innerHTML on every change, which destroyed
-                focus. The fiber engine fixes this by patching only what changed.
+                focus. The reconciler fixes this by patching only what changed.
             </p>
 
             <Heading level={2} id="notfound">My component renders empty</Heading>

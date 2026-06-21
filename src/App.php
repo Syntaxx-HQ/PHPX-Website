@@ -35,7 +35,7 @@ function NotFound()
 {
     return (
         <div className="prose" data-testid="not-found">
-            <h1>404 — Not found</h1>
+            <h1>404 - Not found</h1>
             <p className="lead">That page does not exist.</p>
             <p><a href="/">Back home</a></p>
         </div>

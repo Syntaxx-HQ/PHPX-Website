@@ -41,7 +41,7 @@ PHP;
             <CodeBlock code={$functional} />
 
             <Heading level={2} id="lazy">Lazy initial state</Heading>
-            <p>If computing the initial value is expensive, pass a function — it runs only once:</p>
+            <p>If computing the initial value is expensive, pass a function - it runs only once:</p>
             <CodeBlock code={$lazy} />
 
             <Heading level={2} id="bail-out">Bail-out</Heading>

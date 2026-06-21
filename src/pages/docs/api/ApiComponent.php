@@ -15,9 +15,9 @@ PHP;
             </p>
             <Heading level={2} id="reserved">Reserved props</Heading>
             <ul>
-                <li><code>key</code> — stable identity for reconciliation. Not passed to the component.</li>
-                <li><code>ref</code> — binds a useRef to a host node.</li>
-                <li><code>children</code> — the nested content, available as a prop.</li>
+                <li><code>key</code> - stable identity for reconciliation. Not passed to the component.</li>
+                <li><code>ref</code> - binds a useRef to a host node.</li>
+                <li><code>children</code> - the nested content, available as a prop.</li>
             </ul>
         </DocPage>
     );

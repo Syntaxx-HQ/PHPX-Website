@@ -33,8 +33,8 @@ JSON;
             <p>Wire up Composer scripts to build the WASM bundle and serve it:</p>
             <CodeBlock code={$scripts} language="json" />
             <ul>
-                <li><code>composer build</code> — compile and pack the WebAssembly bundle.</li>
-                <li><code>composer serve</code> — start a local dev server.</li>
+                <li><code>composer build</code> - compile and pack the WebAssembly bundle.</li>
+                <li><code>composer serve</code> - start a local dev server.</li>
             </ul>
 
             <Callout type="tip" title="Fastest start">

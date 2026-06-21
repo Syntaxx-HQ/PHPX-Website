@@ -18,7 +18,7 @@ PHP;
         <DocPage title="Forms and Controlled Inputs" description="Inputs that keep their focus and caret.">
             <p>
                 A controlled input takes its value from state and updates that state on every change. In
-                many runtimes this loses focus on each keystroke. In PHPX the fiber engine patches only
+                many runtimes this loses focus on each keystroke. In PHPX the reconciler patches only
                 the changed attribute, so focus and caret stay exactly where they were.
             </p>
             <CodeBlock code={$code} />
@@ -27,7 +27,7 @@ PHP;
             </LiveExample>
 
             <Heading level={2} id="keyboard">Keyboard handling</Heading>
-            <p>Use <code>onKeyPress</code> or <code>onKeyDown</code> to react to keys — for example, submit on Enter.</p>
+            <p>Use <code>onKeyPress</code> or <code>onKeyDown</code> to react to keys - for example, submit on Enter.</p>
             <LiveExample title="Press Enter to add">
                 <TodoExample />
             </LiveExample>

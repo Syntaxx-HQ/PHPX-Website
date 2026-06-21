@@ -43,9 +43,8 @@ PHP;
 
             <Heading level={2} id="prerequisites">Prerequisites</Heading>
             <ul>
-                <li>PHP 8.3 or higher</li>
+                <li>PHP 8.4 or higher</li>
                 <li>Composer</li>
-                <li>Node.js 18+ (only for the Playwright test suite)</li>
                 <li>A modern browser with WebAssembly support</li>
             </ul>
 
@@ -61,7 +60,7 @@ PHP;
 
             <Heading level={2} id="adding-state">Adding state</Heading>
             <p>
-                Use the <code>useState</code> hook to add interactivity. Here is the classic counter —
+                Use the <code>useState</code> hook to add interactivity. Here is the classic counter -
                 and it is <em>actually running</em> below:
             </p>
             <CodeBlock code={$counter} />
@@ -69,16 +68,16 @@ PHP;
                 <CounterExample />
             </LiveExample>
             <Callout type="tip" title="It is really running">
-                That counter is a real PHPX component compiled to WebAssembly — server-rendered, then
+                That counter is a real PHPX component compiled to WebAssembly - server-rendered, then
                 hydrated. Click it and the state updates with a surgical DOM patch, no full re-render.
             </Callout>
 
             <Heading level={2} id="next-steps">Next steps</Heading>
             <ul>
-                <li><a href="/docs/jsx">JSX Syntax</a> — the rules of JSX-in-PHP.</li>
-                <li><a href="/docs/components">Components and Props</a> — composing your UI.</li>
-                <li><a href="/docs/hooks/use-state">useState</a> — managing state.</li>
-                <li><a href="/docs/ssr/overview">Server-Side Rendering</a> — the isomorphic story.</li>
+                <li><a href="/docs/jsx">JSX Syntax</a> - the rules of JSX-in-PHP.</li>
+                <li><a href="/docs/components">Components and Props</a> - composing your UI.</li>
+                <li><a href="/docs/hooks/use-state">useState</a> - managing state.</li>
+                <li><a href="/docs/ssr/overview">Server-Side Rendering</a> - the isomorphic story.</li>
             </ul>
         </DocPage>
     );

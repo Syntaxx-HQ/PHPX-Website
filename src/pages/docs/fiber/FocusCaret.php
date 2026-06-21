@@ -16,7 +16,7 @@ function FocusCaret()
                 <li>The selection range in inputs and textareas.</li>
                 <li>The caret position in contentEditable regions.</li>
             </ul>
-            <LiveExample title="Type freely — focus stays">
+            <LiveExample title="Type freely - focus stays">
                 <TextEchoExample />
             </LiveExample>
 

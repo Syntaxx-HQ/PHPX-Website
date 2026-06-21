@@ -11,7 +11,7 @@ test('home is server-rendered and hydrates to interactive', async ({ request, pa
     await page.goto('/');
     const counter = page.getByTestId('live-counter').first();
     await expect(counter).toHaveText('Count: 0', { timeout: 30000 });
-    await counter.click();
+    await page.getByTestId('hero-plus').click();
     await expect(counter).toHaveText('Count: 1');
 });
 
