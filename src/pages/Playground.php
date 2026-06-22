@@ -11,7 +11,7 @@ class PgState
 
 /** Render an element into the preview root (creating the root once). Routing all
  *  preview content through the reconciler keeps the loading text, result, and
- *  errors swapping cleanly — setting innerHTML directly would desync the root. */
+ *  errors swapping cleanly - setting innerHTML directly would desync the root. */
 function pgShow($element): void
 {
     $window = new Vrzno();
@@ -60,18 +60,55 @@ function pgRender(string $php): void
 }
 
 /**
+ * Build the CodeMirror editor straight from PHP via VRZNO - no hand-written JS
+ * glue. The (nested) options object is assembled on the JS side with JSON.parse,
+ * so we never marshal a nested PHP array (which VRZNO can't do). Client-only:
+ * effects don't run on the server, so no-JS just keeps the plain textarea.
+ */
+function pgInitEditor(): void
+{
+    $window = new Vrzno();
+    if (!$window->CodeMirror) {
+        return;
+    }
+    $ta = $window->document->getElementById('playground-code');
+    if (!$ta || $ta->getAttribute('data-cm') === '1') {
+        return;
+    }
+    $ta->setAttribute('data-cm', '1');
+
+    $opts = $window->JSON->parse(
+        '{"lineNumbers":true,"mode":{"name":"php","startOpen":true},"theme":"default",'
+        . '"tabSize":4,"indentUnit":4,"indentWithTabs":false,"lineWrapping":true,'
+        . '"autoCloseBrackets":true,"matchBrackets":true,"styleActiveLine":true}'
+    );
+    $window->__pgEditor = $window->CodeMirror->fromTextArea($ta, $opts);
+
+    // Ctrl/Cmd-Enter to run - one delegated keydown listener (a PHP closure).
+    if (!$window->__pgKeyBound) {
+        $window->__pgKeyBound = true;
+        $window->document->addEventListener('keydown', function ($e) {
+            if (($e->ctrlKey || $e->metaKey) && $e->key === 'Enter') {
+                runPlayground();
+            }
+        });
+    }
+}
+
+/**
  * Compile the editor source on the server (where the parser runs), then eval and
  * render the returned PHP live in the browser. The result is fully interactive.
  */
 function runPlayground(): void
 {
     $window = new Vrzno();
-    $code = $window->getPgCode
-        ? (string) $window->getPgCode()
+    $editor = $window->__pgEditor;
+    $code = $editor
+        ? (string) $editor->getValue()
         : (string) $window->document->getElementById('playground-code')->value;
     pgShow(pgMessage('Compiling...', '#94a3b8'));
 
-    // Keep the RequestInit flat — VRZNO marshals a nested headers array into a
+    // Keep the RequestInit flat - VRZNO marshals a nested headers array into a
     // value fetch rejects. The server reads php://input regardless of headers.
     $opts = ['method' => 'POST', 'body' => $code];
 
@@ -140,7 +177,7 @@ function Demo() {
             <div className="text-slate-700">
                 You typed: <span className="font-semibold text-violet-700">{$text}</span>
             </div>
-            <div className="text-xs text-slate-400">{strlen($text)} characters — focus stays put on every keystroke.</div>
+            <div className="text-xs text-slate-400">{strlen($text)} characters - focus stays put on every keystroke.</div>
         </div>
     );
 }
@@ -224,8 +261,9 @@ function pgLoadExample($index): void
         return;
     }
     $window = new Vrzno();
-    if ($window->setPgCode) {
-        $window->setPgCode($examples[$i]['code']);
+    $editor = $window->__pgEditor;
+    if ($editor) {
+        $editor->setValue($examples[$i]['code']);
     } else {
         $window->document->getElementById('playground-code')->value = $examples[$i]['code'];
     }
@@ -242,10 +280,7 @@ function Playground()
         // #playground-output and a new textarea, so drop the stale preview root
         // and re-attach CodeMirror to the new editor.
         PgState::$root = null;
-        $window = new Vrzno();
-        if ($window->CodeMirror) {
-            $window->initPgEditor('playground-code');
-        }
+        pgInitEditor();
     }, []);
 
     $examples = playgroundExamples();
@@ -256,10 +291,10 @@ function Playground()
             <h1 className="text-4xl font-extrabold text-slate-900 mb-3">Playground</h1>
             <p className="text-lg text-slate-500 mb-8">
                 Edit the PHPX below and run it. The compiler turns your JSX into PHP, and the result is
-                executed live in your browser — the component you see is really running.
+                executed live in your browser - the component you see is really running.
             </p>
 
-            <div className="grid lg:grid-cols-2 gap-5 items-start">
+            <div className="space-y-6">
                 <div>
                     <div className="flex items-center justify-between mb-2 gap-3">
                         <div className="text-xs font-semibold text-slate-400 uppercase tracking-wide">Editor</div>
@@ -277,7 +312,7 @@ function Playground()
                         id="playground-code"
                         data-testid="playground-code"
                         spellcheck="false"
-                        className="w-full h-96 font-mono text-sm leading-relaxed border border-slate-700 rounded-lg p-4 bg-slate-900 text-slate-100 focus:outline-none focus:ring-2 focus:ring-violet-500"
+                        className="w-full h-96 font-mono text-sm leading-relaxed border border-slate-200 rounded-lg p-4 bg-white text-slate-800 focus:outline-none focus:ring-2 focus:ring-violet-400"
                     >{$default}</textarea>
                     <button
                         data-testid="playground-run"

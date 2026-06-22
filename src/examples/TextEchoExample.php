@@ -2,7 +2,7 @@
 
 use function Syntaxx\PHPX\Framework\useState;
 
-/** Controlled input — proves focus/caret survive re-renders (the fiber win). */
+/** Controlled input - proves focus/caret survive re-renders (the reconciler win). */
 function TextEchoExample()
 {
     [$text, $setText] = useState('');
@@ -19,7 +19,7 @@ function TextEchoExample()
             <div className="text-slate-700">
                 You typed: <span data-testid="echo-output" className="font-semibold text-violet-700">{$text}</span>
             </div>
-            <div className="text-xs text-slate-400">{strlen($text)} characters — focus stays put on every keystroke.</div>
+            <div className="text-xs text-slate-400">{strlen($text)} characters - focus stays put on every keystroke.</div>
         </div>
     );
 }

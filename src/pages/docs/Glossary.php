@@ -5,8 +5,8 @@ function Glossary()
     $terms = [
         ['Component', 'A PHP function that returns JSX and renders to UI.'],
         ['Element', 'The lightweight description a component returns, created by Component::create.'],
-        ['Fiber', 'A persistent node in the reconciler tree that mirrors an element and holds its state.'],
-        ['Reconciliation', 'Diffing new output against the existing fiber tree and patching the DOM.'],
+        ['Reconciler node', 'A persistent node in the reconciler tree that mirrors an element and holds its state.'],
+        ['Reconciliation', 'Diffing new output against the existing reconciler tree and patching the DOM.'],
         ['Hook', 'A function like useState that lets a component hold state or run effects.'],
         ['Hydration', 'Adopting server-rendered DOM on the client instead of rebuilding it.'],
         ['Isomorphic', 'Code that runs the same on the server and the client.'],

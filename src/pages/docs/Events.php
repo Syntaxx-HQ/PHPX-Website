@@ -30,10 +30,10 @@ PHP;
                 <TextEchoExample />
             </LiveExample>
             <ul>
-                <li><code>{'$e->target->value'}</code> — the value of an input or select</li>
-                <li><code>{'$e->key'}</code> — the key name for keyboard events</li>
-                <li><code>{'$e->preventDefault()'}</code> — stop the default action</li>
-                <li><code>{'$e->stopPropagation()'}</code> — stop the event bubbling</li>
+                <li><code>{'$e->target->value'}</code> - the value of an input or select</li>
+                <li><code>{'$e->key'}</code> - the key name for keyboard events</li>
+                <li><code>{'$e->preventDefault()'}</code> - stop the default action</li>
+                <li><code>{'$e->stopPropagation()'}</code> - stop the event bubbling</li>
             </ul>
 
             <Heading level={2} id="delegation">Delegation</Heading>

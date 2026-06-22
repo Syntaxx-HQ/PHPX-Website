@@ -19,7 +19,7 @@ PHP;
     return (
         <DocPage title="Your First App" description="Build an interactive counter end to end.">
             <p>
-                Let us build the classic counter. It uses one piece of state and one event handler — the
+                Let us build the classic counter. It uses one piece of state and one event handler - the
                 two building blocks of every interactive component.
             </p>
             <CodeBlock code={$code} />
@@ -32,7 +32,7 @@ PHP;
             <ul>
                 <li><code>useState(0)</code> creates a state value starting at zero and a setter.</li>
                 <li>The <code>onClick</code> handler calls the setter, which schedules a re-render.</li>
-                <li>The reconciler updates only the text node that changed — nothing else moves.</li>
+                <li>The reconciler updates only the text node that changed - nothing else moves.</li>
             </ul>
 
             <Callout type="tip" title="Keep going">

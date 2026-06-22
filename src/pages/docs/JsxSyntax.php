@@ -11,11 +11,11 @@ function JsxSyntax()
 PHP;
 
     $php = <<<'PHP'
-// Correct — PHP inside the braces:
+// Correct - PHP inside the braces:
 <button onClick={fn() => $setCount($count + 1)}>+1</button>
 <div className={$active ? 'on' : 'off'}>...</div>
 
-// Wrong — JavaScript syntax does not parse:
+// Wrong - JavaScript syntax does not parse:
 <button onClick={() => setCount(count + 1)}>+1</button>
 <div className={{ active: true }}>...</div>
 PHP;
@@ -58,7 +58,7 @@ PHP;
             <CodeBlock code={$php} />
 
             <Heading level={2} id="compiles">How it compiles</Heading>
-            <p>Every element compiles to a <code>Component::create</code> call — type, props, children:</p>
+            <p>Every element compiles to a <code>Component::create</code> call - type, props, children:</p>
             <CodeBlock code={$compiles} />
 
             <Heading level={2} id="conditionals">Conditional rendering</Heading>

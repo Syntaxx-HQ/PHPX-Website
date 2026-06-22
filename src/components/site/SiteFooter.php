@@ -27,7 +27,7 @@ function SiteFooter()
                     <a href="/docs/faq" className="block text-sm py-1 hover:text-white">FAQ</a>
                 </div>
             </div>
-            <div className="border-t border-slate-800 text-center text-xs py-6">© 2026 PHPX — MIT licensed. Built with PHPX.</div>
+            <div className="border-t border-slate-800 text-center text-xs py-6">© 2026 PHPX - MIT licensed. Built with PHPX.</div>
         </footer>
     );
 }

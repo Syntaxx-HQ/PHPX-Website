@@ -3,7 +3,7 @@
 function JsxGotchas()
 {
     $php = <<<'PHP'
-// Inside braces, write PHP — not JavaScript:
+// Inside braces, write PHP - not JavaScript:
 onClick={fn() => $do()}          // not () => do()
 className={['a' => true]}         // not {a: true}
 {$name}                          // not {name}
@@ -41,11 +41,6 @@ PHP;
                 <li>Namespaced tags are not supported, but dot-notation such as <code>Form.Input</code> is.</li>
             </ul>
 
-            <Callout type="warning" title="Authoring tip">
-                Inside JSX text, prefer plain words over heavy punctuation. When you need symbols in
-                inline code, wrap them in a PHP string expression like
-                <code>{'<code>{\'$e->target->value\'}</code>'}</code>.
-            </Callout>
         </DocPage>
     );
 }

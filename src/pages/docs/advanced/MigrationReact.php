@@ -29,7 +29,7 @@ TXT;
             <Heading level={2} id="different">What is different</Heading>
             <ul>
                 <li>Write PHP inside braces: fn not arrow, arrays not objects, dollar-prefixed variables.</li>
-                <li>There is no separate JavaScript build step — PHP compiles to WebAssembly.</li>
+                <li>There is no separate JavaScript build step - PHP compiles to WebAssembly.</li>
                 <li>SSR is isomorphic by default, so hydration mismatches do not happen.</li>
             </ul>
         </DocPage>

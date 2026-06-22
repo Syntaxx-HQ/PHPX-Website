@@ -2,8 +2,8 @@
 
 /**
  * The killer feature: a REAL running component (children) rendered inline, with
- * its source shown below. Because the child is part of the same fiber tree, it
- * SSRs its initial state and hydrates to fully interactive — a live proof of the
+ * its source shown below. Because the child is part of the same reconciler tree, it
+ * SSRs its initial state and hydrates to fully interactive - a live proof of the
  * framework. `code` is a nowdoc string mirroring the example source.
  */
 function LiveExample($props)

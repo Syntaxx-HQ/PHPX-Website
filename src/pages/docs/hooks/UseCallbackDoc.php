@@ -12,7 +12,7 @@ PHP;
         <DocPage title="useCallback" description="A stable function identity across renders.">
             <p>
                 <code>useCallback</code> returns the same function instance until its dependencies
-                change. It is <code>useMemo</code> specialized for callbacks — useful for passing a
+                change. It is <code>useMemo</code> specialized for callbacks - useful for passing a
                 stable handler to a child component.
             </p>
             <CodeBlock code={$code} />

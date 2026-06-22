@@ -1,6 +1,6 @@
 <?php
 
-/** Docs sidebar — renders docsNav() with active-link highlighting. */
+/** Docs sidebar - renders docsNav() with active-link highlighting. */
 function Sidebar($props)
 {
     $path = $props['path'] ?? '';

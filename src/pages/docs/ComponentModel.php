@@ -72,7 +72,7 @@ PHP;
                 <li>A global function with that name</li>
             </ul>
             <Callout type="tip" title="Per-instance state">
-                Each rendered instance of a component has its own hook state — two
+                Each rendered instance of a component has its own hook state - two
                 <code>Counter</code> elements count independently.
             </Callout>
         </DocPage>

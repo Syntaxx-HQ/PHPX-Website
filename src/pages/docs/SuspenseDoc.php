@@ -6,7 +6,7 @@ function SuspenseDoc()
 use function Syntaxx\PHPX\Framework\useSuspenseData;
 
 function Profile() {
-    // No loading branch here — it suspends to the boundary.
+    // No loading branch here - it suspends to the boundary.
     $user = useSuspenseData('user', fn() => fetchUser());
     return <div>{$user['name']}</div>;
 }
@@ -38,7 +38,7 @@ PHP;
                 the data resolves.
             </p>
             <Callout type="note" title="Works with streaming">
-                During streaming SSR, each boundary streams independently — the shell flushes
+                During streaming SSR, each boundary streams independently - the shell flushes
                 immediately, and each boundary content reveals as soon as it resolves.
             </Callout>
         </DocPage>

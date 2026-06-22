@@ -19,7 +19,7 @@ function EventDelegation()
 
             <Heading level={2} id="mapping">Event name mapping</Heading>
             <p>
-                Prop names map to DOM event names by lowercasing — <code>onClick</code> becomes
+                Prop names map to DOM event names by lowercasing - <code>onClick</code> becomes
                 <code>click</code>, <code>onInput</code> becomes <code>input</code>. The one special
                 case is <code>onDoubleClick</code>, which maps to <code>dblclick</code>.
             </p>

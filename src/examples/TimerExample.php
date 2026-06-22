@@ -3,7 +3,7 @@
 use function Syntaxx\PHPX\Framework\useState;
 use function Syntaxx\PHPX\Framework\useEffect;
 
-/** useEffect with a cleanup — starts an interval, clears it on pause/unmount. */
+/** useEffect with a cleanup - starts an interval, clears it on pause/unmount. */
 function TimerExample()
 {
     [$seconds, $setSeconds] = useState(0);

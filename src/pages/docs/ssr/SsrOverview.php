@@ -34,7 +34,7 @@ PHP;
             <CodeBlock code={$server} />
 
             <Heading level={2} id="client">On the client</Heading>
-            <p><code>hydrateRoot</code> adopts the server DOM in place instead of rebuilding it — no flash, no refetch.</p>
+            <p><code>hydrateRoot</code> adopts the server DOM in place instead of rebuilding it - no flash, no refetch.</p>
             <CodeBlock code={$client} />
             <LiveExample title="This data was server-rendered">
                 <UseDataExample />
@@ -47,9 +47,9 @@ PHP;
 
             <Heading level={2} id="more">Going further</Heading>
             <ul>
-                <li><a href="/docs/ssr/hydration">Hydration</a> — how adoption works.</li>
-                <li><a href="/docs/ssr/streaming">Streaming</a> — flush the shell first.</li>
-                <li><a href="/docs/suspense">Suspense</a> — declarative loading boundaries.</li>
+                <li><a href="/docs/ssr/hydration">Hydration</a> - how adoption works.</li>
+                <li><a href="/docs/ssr/streaming">Streaming</a> - flush the shell first.</li>
+                <li><a href="/docs/suspense">Suspense</a> - declarative loading boundaries.</li>
             </ul>
         </DocPage>
     );

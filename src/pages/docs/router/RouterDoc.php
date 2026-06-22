@@ -27,7 +27,7 @@ PHP;
         <DocPage title="Client Router" description="SPA navigation without re-booting the runtime.">
             <p>
                 After hydration, the router intercepts internal link clicks and back/forward
-                navigation. It updates the URL with the History API and re-renders in place — no full
+                navigation. It updates the URL with the History API and re-renders in place - no full
                 page reload, and no WebAssembly reboot.
             </p>
             <CodeBlock code={$start} />

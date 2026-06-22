@@ -4,12 +4,12 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "syntaxx/wasm-php-runtime-vrzno": "8.3.0",
-        "syntaxx/phpx-framework": "^0.2.0",
+        "syntaxx/wasm-php-runtime-vrzno": "8.4.22",
+        "syntaxx/phpx-framework": "^0.3.0",
         "syntaxx/phpx-compiler": "^0.1.0"
     },
     "require-dev": {
-        "syntaxx/phpx-build-tools": "^0.1.0",
+        "syntaxx/phpx-build-tools": "^0.2.1",
         "syntaxx/webassembly-packer": "^0.1.0"
     },
     "minimum-stability": "dev",
@@ -37,7 +37,7 @@
     },
     "scripts": {
         "build:server": "php vendor/syntaxx/phpx-compiler/bin/compile --compile-php-files src dist",
-        "build:client": "phpx-build build",
+        "build:client": "BASE_URL=/ phpx-build build",
         "build": [
             "@build:server",
             "@build:client"

@@ -15,7 +15,7 @@ $app = Runtime::hydrateRoot($root);
 $app->render(<App />);
 
 // Client-side navigation: internal link clicks (and back/forward) re-render in
-// place — no full page reload, no PHP-WASM reboot.
+// place - no full page reload, no PHP-WASM reboot.
 Router::start(function () use ($app) {
     $app->render(Component::create("App", [], []));
 });

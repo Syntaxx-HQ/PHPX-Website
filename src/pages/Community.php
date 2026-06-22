@@ -9,13 +9,13 @@ function Community()
 
             <h2>Get involved</h2>
             <ul>
-                <li><a href="https://github.com/Syntaxx-HQ">GitHub</a> — source code, issues, and discussions.</li>
+                <li><a href="https://github.com/Syntaxx-HQ/PHPX-StarterKit">GitHub</a> - source code, issues, and discussions.</li>
                 <li>Try the <a href="/docs/getting-started">starter kits</a> and report what works and what does not.</li>
-                <li>Build something and share it — the showcase is hungry for real apps.</li>
+                <li>Build something and share it - the showcase is hungry for real apps.</li>
             </ul>
 
             <h2>Roadmap</h2>
-            <p>The rendering engine is mature: a fiber reconciler, the full hook suite, events, SSR with hydration and streaming, Suspense, and a client router. What is next:</p>
+            <p>The rendering engine is mature: a Preact-class reconciler, the full hook suite, events, SSR with hydration and streaming, Suspense, and a client router. What is next:</p>
             <ul>
                 <li>Selective and out-of-order hydration.</li>
                 <li>Concurrent, interruptible rendering.</li>

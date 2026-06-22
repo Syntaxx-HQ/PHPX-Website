@@ -1,6 +1,6 @@
 <?php
 
-/** Two independent counters — demonstrates per-instance hook state. */
+/** Two independent counters - demonstrates per-instance hook state. */
 function TwoCountersExample()
 {
     return (

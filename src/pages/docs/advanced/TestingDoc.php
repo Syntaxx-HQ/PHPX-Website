@@ -21,8 +21,8 @@ JS;
 
             <Heading level={2} id="waiting">Waiting for the runtime</Heading>
             <p>
-                The WASM runtime takes a moment to boot. Prefer assertions that poll — such as expecting
-                an element to have text — over fixed delays.
+                The WASM runtime takes a moment to boot. Prefer assertions that poll - such as expecting
+                an element to have text - over fixed delays.
             </p>
 
             <Callout type="tip" title="Console first">
